@@ -2,7 +2,7 @@
 
 export AEROOT=`pwd`
 ./clean.sh
-output_dir=$AEROOT/RUNME-b-output_$(date -Iseconds)
+output_dir=$AEROOT/output_from_exec_$(date -Iseconds)
 mkdir $output_dir
 
 cd ./plotting/from_exec/fig8
