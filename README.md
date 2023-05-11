@@ -45,6 +45,8 @@ Once your environment is ready, simply run the following command to reproduce th
 
 This may takes several hours to complete. Once you have successfully run this command, you will find a directory named `outputs_from_exec_${TIME_YOU_RUN}`  which contains the generated figures. As reproductions were performed on a smaller cluster ( 16 NVIDIA V100 GPUs),  the generated figures may be different from those in the paper. We discuss differences in experiments results [here](#discussion).
 
+**Note**: Please note that the provided scripts have only been tested on a cluster managed by the [Slurm](https://www.schedmd.com/) scheduler and [Spack](https://github.com/spack/spack/) package manager. If your cluster uses different management software, modifications to the scripts may be necessary.
+
 ## Installation
 
 ### SmartMoE

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-python3 ./perf_bench.py /home/zms/model_training/Auto-Megatron/logs/sh-lab-smart_exchange/2nodes_mbs8_H2048_lat0_2022-12-23T01:13:44+0800.log /home/zms/model_training/Auto-Megatron/logs/table_new_760M_32MoE_naive_5000/GPT-760M-32MoE_naive_EP+DP_t1_p1_d16_totalE32_localE4_gbs128_mbs2_ep8_dp2_2022-12-16T23:04:35+08:00.prof/table 16 8
-python3 ./perf_bench.py /home/zms/model_training/Auto-Megatron/logs/sh-lab-smart_exchange/2nodes_mbs4_H2048_lat0_2022-12-23T00:12:22+0800.log /home/zms/model_training/Auto-Megatron/logs/table_new_760M_32MoE_naive_5000/GPT-760M-32MoE_naive_EP+DP_t1_p1_d16_totalE32_localE4_gbs128_mbs2_ep8_dp2_2022-12-16T23:04:35+08:00.prof/table 16 4
-python3 ./perf_bench.py /home/zms/model_training/Auto-Megatron/logs/sh-lab-smart_exchange/1nodes_mbs8_H2048_lat0_2022-12-23T15:44:41+0800.log /home/zms/model_training/Auto-Megatron/logs/table_new_760M_32MoE_naive_5000/GPT-760M-32MoE_naive_EP+DP_t1_p1_d16_totalE32_localE4_gbs128_mbs2_ep8_dp2_2022-12-16T23:04:35+08:00.prof/table 8 8
-python3 ./perf_bench.py /home/zms/model_training/Auto-Megatron/logs/sh-lab-smart_exchange/1nodes_mbs4_H2048_lat0_2022-12-23T14:40:41+0800.log /home/zms/model_training/Auto-Megatron/logs/table_new_760M_32MoE_naive_5000/GPT-760M-32MoE_naive_EP+DP_t1_p1_d16_totalE32_localE4_gbs128_mbs2_ep8_dp2_2022-12-16T23:04:35+08:00.prof/table 8 4

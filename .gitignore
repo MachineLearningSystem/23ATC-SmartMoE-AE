@@ -2,6 +2,7 @@
 scripts/GPT/logs/
 scripts/deepspeed/logs/
 scripts/benchmarks/logs/
+src/performance_model/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
