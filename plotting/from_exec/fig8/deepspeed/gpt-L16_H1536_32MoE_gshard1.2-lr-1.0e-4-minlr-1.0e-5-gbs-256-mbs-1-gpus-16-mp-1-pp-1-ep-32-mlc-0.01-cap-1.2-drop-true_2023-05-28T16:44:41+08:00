@@ -1,0 +1,1154 @@
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+using world size: 16, data-parallel-size: 16, tensor-model-parallel size: 1, pipeline-model-parallel size: 1 
+using torch.float16 for parameters ...
+------------------------ arguments ------------------------
+  accumulate_allreduce_grads_in_fp32 .............. False
+  adam_beta1 ...................................... 0.9
+  adam_beta2 ...................................... 0.95
+  adam_eps ........................................ 1e-08
+  adlr_autoresume ................................. False
+  adlr_autoresume_interval ........................ 1000
+  apply_query_key_layer_scaling ................... True
+  apply_residual_connection_post_layernorm ........ False
+  attention_dropout ............................... 0.1
+  attention_softmax_in_fp32 ....................... False
+  bert_binary_head ................................ True
+  bert_load ....................................... None
+  bf16 ............................................ False
+  bias_dropout_fusion ............................. True
+  bias_gelu_fusion ................................ True
+  biencoder_projection_dim ........................ 0
+  biencoder_shared_query_context_model ............ False
+  block_data_path ................................. None
+  checkpoint_activations .......................... False
+  checkpoint_in_cpu ............................... False
+  checkpoint_num_layers ........................... 1
+  clip_grad ....................................... 1.0
+  consumed_train_samples .......................... 0
+  consumed_train_tokens ........................... 0
+  consumed_valid_samples .......................... 0
+  contigious_checkpointing ........................ False
+  cpu_optimizer ................................... False
+  cpu_torch_adam .................................. False
+  create_moe_param_group .......................... True
+  curriculum_learning ............................. False
+  data_impl ....................................... mmap
+  data_parallel_size .............................. 16
+  data_path ....................................... ['/mnt/znvme/zms/fastmoe-dataset/my-bert_text_sentence']
+  dataloader_type ................................. single
+  DDP_impl ........................................ local
+  decoder_seq_length .............................. None
+  deepscale ....................................... False
+  deepscale_config ................................ None
+  deepspeed ....................................... True
+  deepspeed_activation_checkpointing .............. False
+  deepspeed_config ................................ /home/atc23_ae/SmartMoE-AE/scripts/deepspeed/ds_config_gpt_gpt-L16_H1536_32MoE_gshard1.2-lr-1.0e-4-minlr-1.0e-5-gbs-256-mbs-1-gpus-16-mp-1-pp-1-ep-32-mlc-0.01-cap-1.2-drop-true.json
+  deepspeed_mpi ................................... False
+  distribute_checkpointed_activations ............. False
+  distributed_backend ............................. nccl
+  ds_inference .................................... False
+  ds_pipeline_enabled ............................. False
+  embedding_path .................................. None
+  encoder_seq_length .............................. 1024
+  eod_mask_loss ................................... False
+  eval_interval ................................... 100000
+  eval_iters ...................................... 100000
+  evidence_data_path .............................. None
+  exit_duration_in_mins ........................... 30000000
+  exit_interval ................................... None
+  expert_interval ................................. 2
+  ffn_hidden_size ................................. 6144
+  finetune ........................................ False
+  fp16 ............................................ True
+  fp16_lm_cross_entropy ........................... False
+  fp32_residual_connection ........................ False
+  global_batch_size ............................... 256
+  hidden_dropout .................................. 0.1
+  hidden_size ..................................... 1536
+  hidden_size_teacher ............................. None
+  hysteresis ...................................... 2
+  ict_head_size ................................... None
+  ict_load ........................................ None
+  img_dim ......................................... 224
+  indexer_batch_size .............................. 128
+  indexer_log_interval ............................ 1000
+  inference ....................................... False
+  init_method_std ................................. 0.014
+  init_method_xavier_uniform ...................... False
+  initial_loss_scale .............................. 4294967296
+  kd_alpha_ce ..................................... 1
+  kd_beta_ce ...................................... 1
+  kd_temp ......................................... 1.0
+  kv_channels ..................................... 96
+  layernorm_epsilon ............................... 1e-05
+  lazy_mpu_init ................................... None
+  load ............................................ None
+  load_teacher .................................... None
+  local_rank ...................................... None
+  log_batch_size_to_tensorboard ................... True
+  log_interval .................................... 1
+  log_learning_rate_to_tensorboard ................ True
+  log_loss_scale_to_tensorboard ................... True
+  log_num_zeros_in_grad ........................... False
+  log_optimizer_states_to_tensorboard ............. False
+  log_params_norm ................................. False
+  log_timers_to_tensorboard ....................... True
+  log_validation_ppl_to_tensorboard ............... True
+  loss_scale ...................................... None
+  loss_scale_window ............................... 1000
+  lr .............................................. 0.0001
+  lr_decay_iters .................................. None
+  lr_decay_samples ................................ None
+  lr_decay_style .................................. cosine
+  lr_decay_tokens ................................. 300000000000
+  lr_warmup_fraction .............................. None
+  lr_warmup_iters ................................. 0
+  lr_warmup_samples ............................... 0
+  lr_warmup_tokens ................................ 0
+  make_vocab_size_divisible_by .................... 128
+  mask_prob ....................................... 0.15
+  masked_softmax_fusion ........................... True
+  max_position_embeddings ......................... 1024
+  memory_centric_tiled_linear ..................... False
+  merge_file ...................................... /mnt/znvme/zms/fastmoe-dataset/gpt2-merges.txt
+  micro_batch_size ................................ 1
+  min_loss_scale .................................. 1.0
+  min_lr .......................................... 1e-05
+  mlp_type ........................................ standard
+  mmap_warmup ..................................... False
+  moe_eval_capacity_factor ........................ 1.0
+  moe_expert_parallel_size ........................ 16
+  moe_loss_coeff .................................. 0.01
+  moe_min_capacity ................................ 4
+  moe_token_dropping .............................. True
+  moe_train_capacity_factor ....................... 1.2
+  mos ............................................. False
+  no_load_lr_state ................................ False
+  no_load_optim ................................... None
+  no_load_rng ..................................... None
+  no_pipeline_parallel ............................ True
+  no_save_optim ................................... None
+  no_save_rng ..................................... None
+  num_attention_heads ............................. 16
+  num_attention_heads_teacher ..................... None
+  num_channels .................................... 3
+  num_classes ..................................... 1000
+  num_experts ..................................... [32]
+  num_experts_teacher ............................. [1]
+  num_layers ...................................... 16
+  num_layers_per_virtual_pipeline_stage ........... None
+  num_layers_teacher .............................. None
+  num_workers ..................................... 0
+  onnx_safe ....................................... None
+  openai_gelu ..................................... False
+  optimizer ....................................... adam
+  override_lr_scheduler ........................... False
+  params_dtype .................................... torch.float16
+  partition_activations ........................... False
+  patch_dim ....................................... 16
+  pipeline_model_parallel_size .................... 1
+  profile_backward ................................ False
+  query_in_block_prob ............................. 0.1
+  rampup_batch_size ............................... None
+  rank ............................................ 0
+  remote_device ................................... none
+  reset_attention_mask ............................ False
+  reset_iteration ................................. False
+  reset_position_ids .............................. False
+  retriever_report_topk_accuracies ................ []
+  retriever_score_scaling ......................... False
+  retriever_seq_length ............................ 256
+  sample_rate ..................................... 1.0
+  save ............................................ None
+  save_interval ................................... 100000
+  scatter_gather_tensors_in_pipeline .............. True
+  scattered_embeddings ............................ False
+  seed ............................................ 1234
+  seq_length ...................................... 1024
+  sgd_momentum .................................... 0.9
+  short_seq_prob .................................. 0.1
+  split ........................................... 100,0,0
+  split_transformers .............................. False
+  synchronize_each_layer .......................... False
+  tensor_model_parallel_size ...................... 1
+  tensorboard_dir ................................. /home/atc23_ae/SmartMoE-AE/scripts/deepspeed/output/tensorboard/gpt-L16_H1536_32MoE_gshard1.2-lr-1.0e-4-minlr-1.0e-5-gbs-256-mbs-1-gpus-16-mp-1-pp-1-ep-32-mlc-0.01-cap-1.2-drop-true_nico0_2023.05.28-16.44.41
+  tensorboard_log_interval ........................ 1
+  tensorboard_queue_size .......................... 1
+  tile_factor ..................................... 1
+  titles_data_path ................................ None
+  tokenizer_type .................................. GPT2BPETokenizer
+  topk ............................................ 1
+  train_iters ..................................... 20
+  train_samples ................................... None
+  train_tokens .................................... 300000000000
+  use_checkpoint_lr_scheduler ..................... False
+  use_contiguous_buffers_in_ddp ................... False
+  use_cpu_initialization .......................... None
+  use_one_sent_docs ............................... False
+  use_pin_memory .................................. False
+  use_tutel ....................................... False
+  virtual_pipeline_model_parallel_size ............ None
+  vocab_extra_ids ................................. 0
+  vocab_file ...................................... /mnt/znvme/zms/fastmoe-dataset/gpt2-vocab.json
+  weight_decay .................................... 0.1
+  world_size ...................................... 16
+  zero_allgather_bucket_size ...................... 0.0
+  zero_contigious_gradients ....................... False
+  zero_reduce_bucket_size ......................... 0.0
+  zero_reduce_scatter ............................. False
+  zero_stage ...................................... 1.0
+-------------------- end of arguments ---------------------
+setting number of micro-batches to constant 16
+> building GPT2BPETokenizer tokenizer ...
+ > padded vocab (size: 50257) with 47 dummy tokens (new size: 50304)
+> initializing torch distributed ...
+[2023-05-28 16:44:49,105] [INFO] [distributed.py:46:init_distributed] Initializing torch distributed with backend: nccl
+> initializing tensor model parallel with size 1
+> initializing pipeline model parallel with size 1
+> setting random seeds to 1234 ...
+> initializing model parallel cuda seeds on global rank 0, model parallel rank 0, and data parallel rank 0 with model parallel seed: 3952 and data parallel seed: 1234
+make: Entering directory '/home/atc23_ae/SmartMoE-AE/src/Megatron-DeepSpeed/megatron/data'
+make: Nothing to be done for 'default'.
+make: Leaving directory '/home/atc23_ae/SmartMoE-AE/src/Megatron-DeepSpeed/megatron/data'
+> compiling dataset index builder ...
+>>> done with dataset index builder. Compilation time: 0.138 seconds
+> compiling and loading fused kernels ...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/atc23_ae/SmartMoE-AE/src/Megatron-DeepSpeed/megatron/fused_kernels/build/build.ninja...
+Building extension module scaled_upper_triang_masked_softmax_cuda...
+Using envvar MAX_JOBS (64) as the number of workers...
+ninja: no work to do.
+Loading extension module scaled_upper_triang_masked_softmax_cuda...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/atc23_ae/SmartMoE-AE/src/Megatron-DeepSpeed/megatron/fused_kernels/build/build.ninja...
+Building extension module scaled_masked_softmax_cuda...
+Using envvar MAX_JOBS (64) as the number of workers...
+ninja: no work to do.
+Loading extension module scaled_masked_softmax_cuda...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/atc23_ae/SmartMoE-AE/src/Megatron-DeepSpeed/megatron/fused_kernels/build/build.ninja...
+Building extension module fused_mix_prec_layer_norm_cuda...
+Using envvar MAX_JOBS (64) as the number of workers...
+ninja: no work to do.
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+Loading extension module fused_mix_prec_layer_norm_cuda...
+>>> done with compiling and loading fused kernels. Compilation time: 7.658 seconds
+time to initialize megatron (seconds): 10.568
+[after megatron is initialized] datetime: 2023-05-28 16:44:58 
+building GPT model ...
+[2023-05-28 16:44:58,637] [INFO] [utils.py:824:see_memory_usage] Before Building Model
+[2023-05-28 16:44:58,638] [INFO] [utils.py:825:see_memory_usage] MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+[2023-05-28 16:44:58,638] [INFO] [utils.py:833:see_memory_usage] CPU Virtual Memory:  used = 84.38 GB, percent = 22.4%
+[2023-05-28 16:44:58,671] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,678] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,685] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,692] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,701] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,710] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,717] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,723] [INFO] [logging.py:69:log_dist] [Rank 0] Creating MoE layer with num_experts: 32 | num_local_experts: 2 | expert_parallel_size: 16
+[2023-05-28 16:44:58,809] [INFO] [utils.py:824:see_memory_usage] After Building Model
+[2023-05-28 16:44:58,810] [INFO] [utils.py:825:see_memory_usage] MA 1.27 GB         Max_MA 1.31 GB         CA 1.34 GB         Max_CA 1 GB 
+[2023-05-28 16:44:58,810] [INFO] [utils.py:833:see_memory_usage] CPU Virtual Memory:  used = 84.46 GB, percent = 22.4%
+ > number of parameters on (tensor, pipeline) model parallel rank (0, 0): 683596800
+> learning rate decay style: cosine
+DeepSpeed is enabled.
+[2023-05-28 16:44:58,825] [INFO] [logging.py:69:log_dist] [Rank 0] DeepSpeed info: version=0.6.1, git-hash=unknown, git-branch=unknown
+No existing process group found, creating a new group named: ep_size_16
+[2023-05-28 16:44:59,038] [INFO] [logging.py:69:log_dist] [Rank 0] Creating deepspeed groups with model parallel size 1, expert parallel size 16, world size 16, dp world size 16
+[2023-05-28 16:44:59,604] [INFO] [engine.py:277:__init__] DeepSpeed Flops Profiler Enabled: False
+[2023-05-28 16:44:59,605] [INFO] [engine.py:1050:_configure_optimizer] Removing param_group that has no 'params' in the client Optimizer
+[2023-05-28 16:44:59,605] [INFO] [engine.py:1056:_configure_optimizer] Using client Optimizer as basic optimizer
+[2023-05-28 16:44:59,611] [INFO] [engine.py:1072:_configure_optimizer] DeepSpeed Basic Optimizer = FusedAdam
+[2023-05-28 16:44:59,611] [INFO] [logging.py:69:log_dist] [Rank 0] Creating fp16 optimizer with dynamic loss scale
+[2023-05-28 16:44:59,866] [INFO] [logging.py:69:log_dist] [Rank 0] DeepSpeed Final Optimizer = FusedAdam
+[2023-05-28 16:44:59,866] [INFO] [engine.py:786:_configure_lr_scheduler] DeepSpeed using client LR scheduler
+[2023-05-28 16:44:59,866] [INFO] [logging.py:69:log_dist] [Rank 0] DeepSpeed LR Scheduler = <megatron.learning_rates.AnnealingLR object at 0x7f487453bfa0>
+[2023-05-28 16:44:59,866] [INFO] [logging.py:69:log_dist] [Rank 0] step=0, skipped=0, lr=[0.0001, 0.0001, 0.0001, 0.0001], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:44:59,867] [INFO] [config.py:1060:print] DeepSpeedEngine configuration:
+[2023-05-28 16:44:59,867] [INFO] [config.py:1064:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2023-05-28 16:44:59,867] [INFO] [config.py:1064:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2023-05-28 16:44:59,867] [INFO] [config.py:1064:print]   amp_enabled .................. False
+[2023-05-28 16:44:59,867] [INFO] [config.py:1064:print]   amp_params ................... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": null, 
+    "exps_dir": null, 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   bfloat16_enabled ............. False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   checkpoint_tag_validation_enabled  True
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   checkpoint_tag_validation_fail  False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   communication_data_type ...... None
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   curriculum_enabled ........... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   curriculum_params ............ {'curriculum_type': 'seqlen', 'min_difficulty': 80, 'max_difficulty': 1024, 'schedule_type': 'fixed_linear', 'schedule_config': {'total_curriculum_step': 424592, 'difficulty_step': 8}}
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   dataloader_drop_last ......... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   disable_allgather ............ False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   dump_state ................... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   dynamic_loss_scale_args ...... {'init_scale': 2048, 'scale_window': 500, 'delayed_shift': 2, 'min_scale': 1}
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_enabled ........... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_gas_boundary_resolution  1
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_layer_num ......... 0
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_max_iter .......... 100
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_stability ......... 1e-06
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_tol ............... 0.01
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   eigenvalue_verbose ........... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   elasticity_enabled ........... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   fp16_enabled ................. True
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   fp16_master_weights_and_gradients  False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   fp16_mixed_quantize .......... False
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   global_rank .................. 0
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   gradient_accumulation_steps .. 16
+[2023-05-28 16:44:59,868] [INFO] [config.py:1064:print]   gradient_clipping ............ 1.0
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   gradient_predivide_factor .... 1.0
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   initial_dynamic_scale ........ 2048
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   loss_scale ................... 0
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   memory_breakdown ............. False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   optimizer_legacy_fusion ...... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   optimizer_name ............... None
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   optimizer_params ............. None
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0}
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   pld_enabled .................. False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   pld_params ................... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   prescale_gradients ........... True
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_change_rate ......... 0.001
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_groups .............. 1
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_offset .............. 1000
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_period .............. 1000
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_rounding ............ 0
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_start_bits .......... 16
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_target_bits ......... 8
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_training_enabled .... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_type ................ 0
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   quantize_verbose ............. False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   scheduler_name ............... None
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   scheduler_params ............. None
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   sparse_attention ............. None
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   sparse_gradients_enabled ..... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   steps_per_print .............. 1
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   tensorboard_enabled .......... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   tensorboard_job_name ......... DeepSpeedJobName
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   tensorboard_output_path ...... 
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   train_batch_size ............. 256
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   train_micro_batch_size_per_gpu  1
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   use_quantizer_kernel ......... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   wall_clock_breakdown ......... False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   world_size ................... 16
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   zero_allow_untested_optimizer  False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   zero_config .................. {
+    "stage": 0, 
+    "contiguous_gradients": true, 
+    "reduce_scatter": true, 
+    "reduce_bucket_size": 5.000000e+08, 
+    "allgather_partitions": true, 
+    "allgather_bucket_size": 5.000000e+08, 
+    "overlap_comm": false, 
+    "load_from_fp32_weights": true, 
+    "elastic_checkpoint": true, 
+    "offload_param": null, 
+    "offload_optimizer": null, 
+    "sub_group_size": 1.000000e+09, 
+    "prefetch_bucket_size": 5.000000e+07, 
+    "param_persistence_threshold": 1.000000e+05, 
+    "max_live_parameters": 1.000000e+09, 
+    "max_reuse_distance": 1.000000e+09, 
+    "gather_16bit_weights_on_model_save": false, 
+    "ignore_unused_parameters": true, 
+    "round_robin_gradients": false, 
+    "legacy_stage1": false
+}
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   zero_enabled ................. False
+[2023-05-28 16:44:59,869] [INFO] [config.py:1064:print]   zero_optimization_stage ...... 0
+[2023-05-28 16:44:59,870] [INFO] [config.py:1066:print]   json = {
+    "train_batch_size": 256, 
+    "train_micro_batch_size_per_gpu": 1, 
+    "steps_per_print": 1, 
+    "zero_optimization": {
+        "stage": 0, 
+        "elastic_checkpoint": true
+    }, 
+    "gradient_clipping": 1.0, 
+    "prescale_gradients": true, 
+    "fp16": {
+        "enabled": true, 
+        "loss_scale": 0, 
+        "loss_scale_window": 500, 
+        "hysteresis": 2, 
+        "min_loss_scale": 1, 
+        "initial_scale_power": 11
+    }, 
+    "bf16": {
+        "enabled": false
+    }, 
+    "curriculum_learning": {
+        "enabled": false, 
+        "curriculum_type": "seqlen", 
+        "min_difficulty": 80, 
+        "max_difficulty": 1.024000e+03, 
+        "schedule_type": "fixed_linear", 
+        "schedule_config": {
+            "total_curriculum_step": 4.245920e+05, 
+            "difficulty_step": 8
+        }
+    }, 
+    "wall_clock_breakdown": false
+}
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Emitting ninja build file /home/atc23_ae/.cache/torch_extensions/py39_cu113/utils/build.ninja...
+Building extension module utils...
+Using envvar MAX_JOBS (64) as the number of workers...
+ninja: no work to do.
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.0120155811309814 seconds
+[after model, optimizer, and learning rate scheduler are built] datetime: 2023-05-28 16:45:02 
+> building train, validation, and test datasets ...
+ > datasets target sizes (minimum size):
+    train:      5120
+    validation: 25600000
+    test:       25600000
+> building train, validation, and test datasets for GPT ...
+ > building dataset index ...
+    reading sizes...
+    reading pointers...
+    reading document index...
+    creating numpy buffer of mmap...
+    creating memory view of numpy buffer...
+ > finished creating indexed dataset in 0.001923 seconds
+    number of documents: 106824622
+ > dataset split:
+    train:
+     document indices in [0, 106824622) total of 106824622 documents
+    validation:
+     document indices in [106824622, 106824622) total of 0 documents
+    test:
+     document indices in [106824622, 106824622) total of 0 documents
+ > loading doc-idx mapping from /mnt/znvme/zms/fastmoe-dataset/my-bert_text_sentence_train_indexmap_5120ns_1024sl_1234s_doc_idx.npy
+ > loading sample-idx mapping from /mnt/znvme/zms/fastmoe-dataset/my-bert_text_sentence_train_indexmap_5120ns_1024sl_1234s_sample_idx.npy
+ > loading shuffle-idx mapping from /mnt/znvme/zms/fastmoe-dataset/my-bert_text_sentence_train_indexmap_5120ns_1024sl_1234s_shuffle_idx.npy
+    loaded indexed file in 0.003 seconds
+    total number of samples: 2899936
+    total number of epochs: 1
+> finished creating GPT datasets ...
+[after dataloaders are built] datetime: 2023-05-28 16:45:03 
+done with setup ...
+training ...
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+> setting tensorboard ...
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.4275779724121094 seconds
+time (ms) | model-and-optimizer-setup: 1677.32 | train/valid/test-data-iterators-setup: 878.35
+[before the start of training step] datetime: 2023-05-28 16:45:05 
+[2023-05-28 16:45:12,354] [INFO] [logging.py:69:log_dist] [Rank 0] step=1, skipped=0, lr=[0.0001, 0.0001, 0.0001, 0.0001], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[Rank 0] (after 1 iterations) memory (MB) | allocated: 9129.384765625 | max allocated: 13464.87890625 | reserved: 15720.0 | max reserved: 15720.0
+ iteration        1/      20 | consumed samples:          256 | consumed tokens:       262144 | elapsed time per iteration (ms): 7449.2 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 1.101720E+01 | moe loss: 1.184029E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 4434.86 | backward-compute: 2714.57 | backward-embedding-all-reduce: 0.01 | optimizer: 135.32 | batch-generator: 472.90
+[2023-05-28 16:45:17,106] [INFO] [logging.py:69:log_dist] [Rank 0] step=2, skipped=0, lr=[9.999999999983044e-05, 9.999999999983044e-05, 9.999999999983044e-05, 9.999999999983044e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+ iteration        2/      20 | consumed samples:          512 | consumed tokens:       524288 | elapsed time per iteration (ms): 5011.1 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 9.748632E+00 | moe loss: 2.516424E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2193.00 | backward-compute: 2195.78 | backward-embedding-all-reduce: 0.01 | optimizer: 80.01 | batch-generator: 419.05
+[2023-05-28 16:45:22,030] [INFO] [logging.py:69:log_dist] [Rank 0] step=3, skipped=0, lr=[9.999999999932177e-05, 9.999999999932177e-05, 9.999999999932177e-05, 9.999999999932177e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:22,068] [INFO] [timer.py:181:stop] 0/3, SamplesPerSec=20.853787336866304, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        3/      20 | consumed samples:          768 | consumed tokens:       786432 | elapsed time per iteration (ms): 4684.7 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 9.297160E+00 | moe loss: 2.352051E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2210.06 | backward-compute: 2191.55 | backward-embedding-all-reduce: 0.01 | optimizer: 77.80 | batch-generator: 359.20
+[2023-05-28 16:45:26,593] [INFO] [logging.py:69:log_dist] [Rank 0] step=4, skipped=0, lr=[9.999999999847399e-05, 9.999999999847399e-05, 9.999999999847399e-05, 9.999999999847399e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:26,630] [INFO] [timer.py:181:stop] 0/4, SamplesPerSec=20.984973335249144, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        4/      20 | consumed samples:         1024 | consumed tokens:      1048576 | elapsed time per iteration (ms): 4579.7 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 9.214164E+00 | moe loss: 1.916004E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2098.35 | backward-compute: 2189.67 | backward-embedding-all-reduce: 0.01 | optimizer: 78.09 | batch-generator: 373.25
+[2023-05-28 16:45:31,188] [INFO] [logging.py:69:log_dist] [Rank 0] step=5, skipped=0, lr=[9.999999999728707e-05, 9.999999999728707e-05, 9.999999999728707e-05, 9.999999999728707e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:31,225] [INFO] [timer.py:181:stop] 0/5, SamplesPerSec=21.011411039333638, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        5/      20 | consumed samples:         1280 | consumed tokens:      1310720 | elapsed time per iteration (ms): 4595.6 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.991264E+00 | moe loss: 1.786971E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2109.67 | backward-compute: 2189.93 | backward-embedding-all-reduce: 0.01 | optimizer: 77.49 | batch-generator: 385.92
+[2023-05-28 16:45:35,717] [INFO] [logging.py:69:log_dist] [Rank 0] step=6, skipped=0, lr=[9.999999999576103e-05, 9.999999999576103e-05, 9.999999999576103e-05, 9.999999999576103e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:35,755] [INFO] [timer.py:181:stop] 0/6, SamplesPerSec=21.049079279306973, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        6/      20 | consumed samples:         1536 | consumed tokens:      1572864 | elapsed time per iteration (ms): 4456.1 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.778544E+00 | moe loss: 1.614811E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2047.07 | backward-compute: 2187.76 | backward-embedding-all-reduce: 0.01 | optimizer: 77.44 | batch-generator: 339.28
+[2023-05-28 16:45:40,260] [INFO] [logging.py:69:log_dist] [Rank 0] step=7, skipped=0, lr=[9.999999999389589e-05, 9.999999999389589e-05, 9.999999999389589e-05, 9.999999999389589e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:40,298] [INFO] [timer.py:181:stop] 0/7, SamplesPerSec=20.99683430836302, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        7/      20 | consumed samples:         1792 | consumed tokens:      1835008 | elapsed time per iteration (ms): 4579.9 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.654326E+00 | moe loss: 1.503367E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2135.79 | backward-compute: 2188.66 | backward-embedding-all-reduce: 0.01 | optimizer: 78.01 | batch-generator: 334.36
+[2023-05-28 16:45:44,731] [INFO] [logging.py:69:log_dist] [Rank 0] step=8, skipped=0, lr=[9.999999999169163e-05, 9.999999999169163e-05, 9.999999999169163e-05, 9.999999999169163e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:44,768] [INFO] [timer.py:181:stop] 0/8, SamplesPerSec=20.949819478656693, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        8/      20 | consumed samples:         2048 | consumed tokens:      2097152 | elapsed time per iteration (ms): 4476.2 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.514003E+00 | moe loss: 1.444962E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 2024.22 | backward-compute: 2190.39 | backward-embedding-all-reduce: 0.01 | optimizer: 77.20 | batch-generator: 310.83
+[2023-05-28 16:45:49,243] [INFO] [logging.py:69:log_dist] [Rank 0] step=9, skipped=0, lr=[9.999999998914827e-05, 9.999999998914827e-05, 9.999999998914827e-05, 9.999999998914827e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:49,281] [INFO] [timer.py:181:stop] 0/9, SamplesPerSec=20.941229073071582, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration        9/      20 | consumed samples:         2304 | consumed tokens:      2359296 | elapsed time per iteration (ms): 4624.9 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.388726E+00 | moe loss: 1.423162E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1982.70 | backward-compute: 2189.44 | backward-embedding-all-reduce: 0.01 | optimizer: 77.78 | batch-generator: 276.22
+[2023-05-28 16:45:53,777] [INFO] [logging.py:69:log_dist] [Rank 0] step=10, skipped=0, lr=[9.999999998626577e-05, 9.999999998626577e-05, 9.999999998626577e-05, 9.999999998626577e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:53,814] [INFO] [timer.py:181:stop] 0/10, SamplesPerSec=20.96560540616237, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       10/      20 | consumed samples:         2560 | consumed tokens:      2621440 | elapsed time per iteration (ms): 4442.9 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.265247E+00 | moe loss: 1.380588E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1968.55 | backward-compute: 2187.71 | backward-embedding-all-reduce: 0.01 | optimizer: 78.85 | batch-generator: 253.35
+[2023-05-28 16:45:58,252] [INFO] [logging.py:69:log_dist] [Rank 0] step=11, skipped=0, lr=[9.999999998304415e-05, 9.999999998304415e-05, 9.999999998304415e-05, 9.999999998304415e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:45:58,289] [INFO] [timer.py:181:stop] 0/11, SamplesPerSec=20.969527166810572, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       11/      20 | consumed samples:         2816 | consumed tokens:      2883584 | elapsed time per iteration (ms): 4466.0 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.147177E+00 | moe loss: 1.331958E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1990.94 | backward-compute: 2190.97 | backward-embedding-all-reduce: 0.01 | optimizer: 77.37 | batch-generator: 306.45
+[2023-05-28 16:46:02,686] [INFO] [logging.py:69:log_dist] [Rank 0] step=12, skipped=0, lr=[9.999999997948343e-05, 9.999999997948343e-05, 9.999999997948343e-05, 9.999999997948343e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:02,723] [INFO] [timer.py:181:stop] 0/12, SamplesPerSec=20.936329954907666, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       12/      20 | consumed samples:         3072 | consumed tokens:      3145728 | elapsed time per iteration (ms): 4423.0 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 8.035034E+00 | moe loss: 1.318489E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1962.75 | backward-compute: 2191.39 | backward-embedding-all-reduce: 0.01 | optimizer: 76.56 | batch-generator: 283.71
+[2023-05-28 16:46:07,019] [INFO] [logging.py:69:log_dist] [Rank 0] step=13, skipped=0, lr=[9.999999997558358e-05, 9.999999997558358e-05, 9.999999997558358e-05, 9.999999997558358e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:07,056] [INFO] [timer.py:181:stop] 0/13, SamplesPerSec=20.939268173223077, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       13/      20 | consumed samples:         3328 | consumed tokens:      3407872 | elapsed time per iteration (ms): 4333.0 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.950974E+00 | moe loss: 1.320006E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1874.20 | backward-compute: 2191.89 | backward-embedding-all-reduce: 0.01 | optimizer: 77.21 | batch-generator: 242.79
+[2023-05-28 16:46:11,349] [INFO] [logging.py:69:log_dist] [Rank 0] step=14, skipped=0, lr=[9.999999997134462e-05, 9.999999997134462e-05, 9.999999997134462e-05, 9.999999997134462e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:11,386] [INFO] [timer.py:181:stop] 0/14, SamplesPerSec=20.951504220512252, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       14/      20 | consumed samples:         3584 | consumed tokens:      3670016 | elapsed time per iteration (ms): 4297.1 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.858104E+00 | moe loss: 1.322385E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1876.81 | backward-compute: 2186.69 | backward-embedding-all-reduce: 0.01 | optimizer: 80.31 | batch-generator: 260.51
+[2023-05-28 16:46:15,643] [INFO] [logging.py:69:log_dist] [Rank 0] step=15, skipped=0, lr=[9.999999996676654e-05, 9.999999996676654e-05, 9.999999996676654e-05, 9.999999996676654e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:15,680] [INFO] [timer.py:181:stop] 0/15, SamplesPerSec=20.962547425013224, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       15/      20 | consumed samples:         3840 | consumed tokens:      3932160 | elapsed time per iteration (ms): 4315.0 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.766656E+00 | moe loss: 1.336977E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1845.63 | backward-compute: 2189.69 | backward-embedding-all-reduce: 0.01 | optimizer: 78.01 | batch-generator: 235.20
+[2023-05-28 16:46:19,978] [INFO] [logging.py:69:log_dist] [Rank 0] step=16, skipped=0, lr=[9.999999996184934e-05, 9.999999996184934e-05, 9.999999996184934e-05, 9.999999996184934e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:20,015] [INFO] [timer.py:181:stop] 0/16, SamplesPerSec=20.96538949548235, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       16/      20 | consumed samples:         4096 | consumed tokens:      4194304 | elapsed time per iteration (ms): 4348.1 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.704920E+00 | moe loss: 1.308432E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1889.19 | backward-compute: 2191.21 | backward-embedding-all-reduce: 0.01 | optimizer: 77.86 | batch-generator: 205.97
+[2023-05-28 16:46:24,345] [INFO] [logging.py:69:log_dist] [Rank 0] step=17, skipped=0, lr=[9.999999995659302e-05, 9.999999995659302e-05, 9.999999995659302e-05, 9.999999995659302e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:24,382] [INFO] [timer.py:181:stop] 0/17, SamplesPerSec=20.96732478776538, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       17/      20 | consumed samples:         4352 | consumed tokens:      4456448 | elapsed time per iteration (ms): 4400.8 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.631281E+00 | moe loss: 1.266478E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1869.51 | backward-compute: 2194.08 | backward-embedding-all-reduce: 0.01 | optimizer: 77.48 | batch-generator: 224.30
+[2023-05-28 16:46:28,664] [INFO] [logging.py:69:log_dist] [Rank 0] step=18, skipped=0, lr=[9.999999995099759e-05, 9.999999995099759e-05, 9.999999995099759e-05, 9.999999995099759e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:28,701] [INFO] [timer.py:181:stop] 0/18, SamplesPerSec=20.97897655107962, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       18/      20 | consumed samples:         4608 | consumed tokens:      4718592 | elapsed time per iteration (ms): 4216.3 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.566908E+00 | moe loss: 1.293158E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1820.00 | backward-compute: 2197.58 | backward-embedding-all-reduce: 0.01 | optimizer: 78.16 | batch-generator: 201.54
+[2023-05-28 16:46:32,887] [INFO] [logging.py:69:log_dist] [Rank 0] step=19, skipped=0, lr=[9.999999994506305e-05, 9.999999994506305e-05, 9.999999994506305e-05, 9.999999994506305e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:32,924] [INFO] [timer.py:181:stop] 0/19, SamplesPerSec=20.972638412206503, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       19/      20 | consumed samples:         4864 | consumed tokens:      4980736 | elapsed time per iteration (ms): 4248.0 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.515715E+00 | moe loss: 1.279200E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1827.61 | backward-compute: 2198.22 | backward-embedding-all-reduce: 0.01 | optimizer: 77.54 | batch-generator: 224.93
+[2023-05-28 16:46:37,157] [INFO] [logging.py:69:log_dist] [Rank 0] step=20, skipped=0, lr=[9.999999993878939e-05, 9.999999993878939e-05, 9.999999993878939e-05, 9.999999993878939e-05], mom=[(0.9, 0.95), (0.9, 0.95), (0.9, 0.95), (0.9, 0.95)]
+[2023-05-28 16:46:37,194] [INFO] [timer.py:181:stop] 0/20, SamplesPerSec=20.977267625653962, MemAllocated=8.92GB, MaxMemAllocated=13.15GB
+ iteration       20/      20 | consumed samples:         5120 | consumed tokens:      5242880 | elapsed time per iteration (ms): 4383.9 | learning rate: 1.000E-04 | global batch size:   256 | lm loss: 7.473920E+00 | moe loss: 1.259127E-01 | loss scale: 2048.0 | number of skipped iterations:   0 | number of nan iterations:   0 |
+time (ms) | forward-compute: 1847.34 | backward-compute: 2197.92 | backward-embedding-all-reduce: 0.01 | optimizer: 79.78 | batch-generator: 205.25
+[after training is done] datetime: 2023-05-28 16:46:37 
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.0141046047210693 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.114687919616699 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.019656181335449 seconds
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.1110658645629883 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.111786365509033 seconds
+Loading extension module utils...
+Time to load utils op: 0.4174001216888428 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.4245569705963135 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.42716240882873535 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.42789602279663086 seconds
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.4218764305114746 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.42756175994873047 seconds
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.1110482215881348 seconds
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 3.014505386352539 seconds
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [92m[OKAY][0m
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+cpu_adam ............... [93m[NO][0m ....... [92m[OKAY][0m
+cpu_adagrad ............ [93m[NO][0m ....... [92m[OKAY][0m
+fused_adam ............. [93m[NO][0m ....... [92m[OKAY][0m
+fused_lamb ............. [93m[NO][0m ....... [92m[OKAY][0m
+sparse_attn ............ [93m[NO][0m ....... [92m[OKAY][0m
+transformer ............ [93m[NO][0m ....... [92m[OKAY][0m
+stochastic_transformer . [93m[NO][0m ....... [92m[OKAY][0m
+async_io ............... [93m[NO][0m ....... [92m[OKAY][0m
+utils .................. [93m[NO][0m ....... [92m[OKAY][0m
+quantizer .............. [93m[NO][0m ....... [92m[OKAY][0m
+transformer_inference .. [93m[NO][0m ....... [92m[OKAY][0m
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/atc23_ae/.local/lib/python3.9/site-packages/torch']
+torch version .................... 1.12.1+cu113
+torch cuda version ............... 11.3
+torch hip version ................ None
+nvcc version ..................... 11.3
+deepspeed install path ........... ['/home/atc23_ae/.local/lib/python3.9/site-packages/deepspeed']
+deepspeed info ................... 0.6.1, unknown, unknown
+deepspeed wheel compiled w. ...... torch 1.12, cuda 11.3, hip 0.0
+**** Git info for Megatron: git_hash=9543c1b git_branch=main ****
+No existing process group found, creating a new group named: ep_size_16
+Using /home/atc23_ae/.cache/torch_extensions/py39_cu113 as PyTorch extensions root...
+Loading extension module utils...
+Time to load utils op: 0.4249715805053711 seconds

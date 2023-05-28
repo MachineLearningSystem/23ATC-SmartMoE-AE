@@ -58,7 +58,7 @@ if [ $NODELIST != "None" ];then
     exec_args+=" -w $NODELIST"
 fi
 
-exec_args+=" -p Big"
+exec_args+=" -p AE"
 
 LOG_FILE=${LOG_DIR}/${LOG_NAME}
 

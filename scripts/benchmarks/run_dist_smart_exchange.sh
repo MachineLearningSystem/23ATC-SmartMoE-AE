@@ -67,7 +67,7 @@ if [ $NODELIST != "None" ];then
     exec_args+=" -w $NODELIST"
 fi
 
-exec_args+=" -p Big"
+exec_args+=" -p AE"
 
 echo $SCHEDULER_EXEC $exec_args
 

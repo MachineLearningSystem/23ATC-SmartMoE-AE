@@ -1,8 +1,8 @@
 #!/bin/bash
-
+set -x
 export AEROOT=`pwd`
 ./clean.sh
-output_dir=$AEROOT/output_from_exec_$(date -Iseconds)
+output_dir=$AEROOT/outputs_from_exec_$(date -Iseconds)
 mkdir $output_dir
 
 cd ./plotting/from_exec/fig8

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 export AEROOT=`pwd`
 
 output_dir=outputs_from_log_$(date -Iseconds)

@@ -291,7 +291,7 @@ else
     exit 1
 fi
 
-exec_args+=" -p Big"
+exec_args+=" -p AE"
 
 $SCHEDULER_EXEC \
     $exec_args \
